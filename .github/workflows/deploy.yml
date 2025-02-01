@@ -24,5 +24,5 @@ jobs:
           - name: Deploy changes to Netlify
             run: netlify deploy --prod --dir=./
             env:
-              NETLIFY_ACCESS_TOK: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+              NETLIFY_ACCESS_TOK: ${{ secrets.NETLIFY_ACCESS_TOK }}
               NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
