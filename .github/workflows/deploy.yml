@@ -22,7 +22,7 @@ jobs:
             run: npm install -g netlify-cli
 
           - name: Deploy changes to Netlify
-            run: netlify deploy --prod --dirs-./
+            run: netlify deploy --prod --dir=./
             env:
               NETLIFY_ACCESS_TOK: ${{ secrets.NETLIFY_AUTH_TOKEN }}
               NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
