@@ -3,18 +3,26 @@ name: Deploy to Netlify
 on:
   push:
     branches:
-      - main
+      - main 
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Deploy to Netlify
-        uses: jsmrcaga/action-netlify-deploy@master
+      - name: Install Node.js
+        uses: actions/setup-node@v4
         with:
-          NETLIFY_ACCESS_TOK: ${{ secrets.NETLIFY_ACCESS_TOK }}
+          node-version: '18'
+
+      - name: Install Netlify CLI
+        run: npm install -g netlify-cli
+
+      - name: Deploy to Netlify
+        run: jsmrcaga/action-netlify-deploy@master
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-          build_directory: "./"  #
