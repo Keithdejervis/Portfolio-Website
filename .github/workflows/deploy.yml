@@ -1,11 +1,28 @@
-name: Deploy Project
+name: Deploy changes directly to website
 
 on:
     push:
         branches:
             - main
 
-
 jobs:
     deploy:
-        runs-on:
+        runs-on: ubuntu-latest
+
+        steps: 
+          - name: Checkout repo
+            uses: actions/checkout@v4
+        
+          - name: Install Node JS 
+            uses: actions/setup-node@v4
+            with:
+              node-version: '18'
+
+          - name: Install Netlify CLI
+            run: npm install -g netlify-cli
+
+          - name: Deploy changes to Netlify
+            run: netlify deploy --prod --dirs-./
+            env:
+              NETLIFY_ACCESS_TOK: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+              NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
