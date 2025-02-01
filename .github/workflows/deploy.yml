@@ -1,28 +1,20 @@
-name: Deploy changes directly to website
+name: Deploy to Netlify
 
 on:
-    push:
-        branches:
-            - main
+  push:
+    branches:
+      - main
 
 jobs:
-    deploy:
-        runs-on: ubuntu-latest
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-        steps: 
-          - name: Checkout repo
-            uses: actions/checkout@v4
-        
-          - name: Install Node JS 
-            uses: actions/setup-node@v4
-            with:
-              node-version: '18'
-
-          - name: Install Netlify CLI
-            run: npm install -g netlify-cli
-
-          - name: Deploy changes to Netlify
-            run: netlify deploy --prod --dir=./
-            env:
-              NETLIFY_ACCESS_TOK: ${{ secrets.NETLIFY_ACCESS_TOK }}
-              NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      - name: Deploy to Netlify
+        uses: jsmrcaga/action-netlify-deploy@master
+        with:
+          NETLIFY_ACCESS_TOK: ${{ secrets.NETLIFY_ACCESS_TOK }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          build_directory: "./"  #
