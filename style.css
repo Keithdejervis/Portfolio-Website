@@ -415,6 +415,7 @@ article .icon {
 
 .contact-info-container p {
   font-size: larger;
+  padding: 0.5rem 0.5rem 0.5rem 0rem;
 }
 
 .contact-icon {
